@@ -112,6 +112,9 @@ import { Options, Vue } from "vue-class-component";
     msg: String,
   },
   methods: {
+    click_more() {
+      location.href = "http://dmaxdark.black/";
+    },
     click_btt() {
       window.scrollTo(0, 0);
     },
