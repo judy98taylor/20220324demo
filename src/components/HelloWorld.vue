@@ -97,7 +97,7 @@
         </div>
       </div>
       <footer class="footer">
-        <div class="btt">Back to Top</div>
+        <div class="btt" @click="click_btt">Back to Top</div>
         <p>© Copyright Dimensions X 2020</p>
       </footer>
     </main>
@@ -110,6 +110,11 @@ import { Options, Vue } from "vue-class-component";
 @Options({
   props: {
     msg: String,
+  },
+  methods: {
+    click_btt() {
+      window.scrollTo(0, 0);
+    },
   },
 })
 export default class HelloWorld extends Vue {
