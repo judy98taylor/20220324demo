@@ -1,12 +1,41 @@
 <template>
-  <div class="hello">
-    <!-- <ul>
-      <li>7890</li>
-      <li>7890</li>
-      <li>7890</li>
-      <li>7890</li>
-      <li>7890</li>
-    </ul> -->
+  <div class="hello" id="hello">
+    <div class="Hamburger" @click.self="click_toggler">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <aside id="aside" :class="isShow_aside ? 'aside isShow' : 'aside'">
+      <div class="wrapper">
+        <h3>Navigate to</h3>
+        <div class="closeAside" @click.self="click_toggler">×</div>
+      </div>
+
+      <ul>
+        <li @click="goTo('#home')">
+          <h6>01.</h6>
+          <p>Home</p>
+        </li>
+        <li @click="goTo('#ddcc')">
+          <h6>02.</h6>
+          <p>DDCC</p>
+        </li>
+        <li @click="goTo('#product')">
+          <h6>03.</h6>
+          <p>Product</p>
+        </li>
+        <li @click="goTo('#additional')">
+          <h6>04.</h6>
+          <p>Additional Income</p>
+        </li>
+        <li @click="goTo('#login')">
+          <h6>05.</h6>
+          <p>Login</p>
+        </li>
+      </ul>
+    </aside>
+
     <main>
       <div class="s1" id="home">
         <div class="cont">
@@ -111,17 +140,33 @@ import { Options, Vue } from "vue-class-component";
   props: {
     msg: String,
   },
+  data() {
+    return {
+      isShow_aside: false,
+    };
+  },
   methods: {
+    goTo(a: any) {
+      this.isShow_aside = false;
+      window.location.href = a;
+    },
+    click_toggler() {
+      this.isShow_aside = !this.isShow_aside;
+    },
     click_more() {
       location.href = "http://dmaxdark.black/";
     },
     click_btt() {
       window.scrollTo(0, 0);
     },
+    click_login() {
+      alert("没做！");
+    },
   },
 })
 export default class HelloWorld extends Vue {
   msg!: string;
+  isShow_aside!: boolean;
 }
 </script>
 
@@ -130,6 +175,8 @@ export default class HelloWorld extends Vue {
 .hello {
   font-family: "Nunito Sans", sans-serif;
   font-style: normal;
+  position: relative;
+  height: 100vh;
 }
 .s1 {
   width: 7.5rem;
@@ -280,7 +327,7 @@ export default class HelloWorld extends Vue {
   box-sizing: border-box;
   padding: 2.4rem 0;
   h3 {
-    font-size: 0.14rem;
+    font-size: 0.24rem;
     letter-spacing: 0.08rem;
     color: #fff;
   }
@@ -382,6 +429,100 @@ export default class HelloWorld extends Vue {
   }
   p {
     font-size: 0.2rem;
+  }
+}
+.Hamburger {
+  position: fixed;
+  z-index: 4;
+  top: 0.4rem;
+  right: 0.4rem;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  // background: #000;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  // --color: #000;
+  // background-color: var(--color);
+  opacity: var(--opacity);
+  span {
+    width: 0.6rem;
+    display: block;
+    height: 0.04rem;
+    --color: #fff;
+    background-color: var(--color);
+  }
+  span:nth-child(2) {
+    margin: 0.16rem 0;
+  }
+}
+.aside {
+  position: fixed;
+  background: #000;
+  z-index: 5;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 50vw;
+  width: 89vw;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+  transform-origin: 100% 0;
+  // .closeAside {
+  //   position: absolute;
+  //   top: 0;
+  //   right: 0;
+  //   background: red;
+  // }
+  box-sizing: border-box;
+  padding: 0 10%;
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.28rem;
+    padding-top: 1rem;
+  }
+  .closeAside {
+    color: #fff;
+    padding: 0.2rem;
+    display: block;
+    font-size: 0.4rem;
+    font-weight: bold;
+    // background: red;
+    position: relative;
+    top: -0.1rem;
+  }
+  h3 {
+    font-size: 0.28rem;
+    color: #793ea5;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  ul {
+    padding-top: 0.6rem;
+  }
+  h6 {
+    font-size: 0.2rem;
+    color: rgba(255, 255, 255, 0.25);
+    padding-top: 0.4rem;
+    padding-bottom: 0.1rem;
+  }
+  p {
+    color: #fff;
+    font-size: 0.4rem;
+  }
+}
+
+.aside.isShow {
+  transform: scaleX(1);
+  .ul {
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+    transform-origin: 100% 0;
   }
 }
 </style>
